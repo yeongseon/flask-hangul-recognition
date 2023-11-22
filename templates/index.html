@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한글손글씨 인식 프로젝트</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Footer 고정을 위한 추가 CSS -->
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .content-wrap {
+            min-height: calc(100vh - 70px); /* Footer 높이만큼 빼기 */
+        }
+        footer {
+            height: 70px;
+            line-height: 70px; /* Footer 높이 설정 */
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrap">
+        <header class="bg-primary text-white text-center py-3">
+            <h1 class="display-4">한글손글씨 인식 프로젝트</h1>
+        </header>
+
+        <div class="container mt-4">
+            <form action="/" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="file" class="form-label">한글 손글씨 이미지 업로드:</label>
+                    <input type="file" class="form-control" id="file" name="file">
+                </div>
+                <button type="submit" class="btn btn-primary">한글인식</button>
+            </form>
+            
+            {% if latest_file %}
+                <h2 class="mt-4">업로드된 이미지</h2>
+                <img src="{{ url_for('static', filename='uploads/' + latest_file) }}" alt="Uploaded Image" class="img-fluid mb-3">
+            {% endif %}
+
+            {% if classification_result %}
+            <div class="mt-4">
+                <h2>인식결과</h2>
+                <h3>{{ classification_result }}</h3>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center">
+        <p>&copy; 2023년 AI·SW기반 교육 실무 프로젝트 </p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
